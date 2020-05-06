@@ -1,0 +1,131 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "DevExpressMvvm/19.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/DevExpress.Mvvm.UI.dll": {},
+          "lib/netcoreapp3.0/DevExpress.Mvvm.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/DevExpress.Mvvm.UI.dll": {},
+          "lib/netcoreapp3.0/DevExpress.Mvvm.dll": {}
+        }
+      },
+      "InputInterceptor/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/InputInterceptor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InputInterceptor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DevExpressMvvm/19.2.3": {
+      "sha512": "QnZlv+9KmMaA0KSJ7xneiWF5Qxj7GG/iTUtB5ZdDIbroOzy3rZbfwbB7GcF6kiqUyzM2lf3cg1qV02Qr5vsGGg==",
+      "type": "package",
+      "path": "devexpressmvvm/19.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devexpressmvvm.19.2.3.nupkg.sha512",
+        "devexpressmvvm.nuspec",
+        "lib/net452/DevExpress.Mvvm.UI.dll",
+        "lib/net452/DevExpress.Mvvm.UI.pdb",
+        "lib/net452/DevExpress.Mvvm.dll",
+        "lib/net452/DevExpress.Mvvm.pdb",
+        "lib/netcoreapp3.0/DevExpress.Mvvm.UI.dll",
+        "lib/netcoreapp3.0/DevExpress.Mvvm.UI.pdb",
+        "lib/netcoreapp3.0/DevExpress.Mvvm.dll",
+        "lib/netcoreapp3.0/DevExpress.Mvvm.pdb"
+      ]
+    },
+    "InputInterceptor/1.0.0": {
+      "type": "project",
+      "path": "../InputInterceptor/InputInterceptor.csproj",
+      "msbuildProject": "../InputInterceptor/InputInterceptor.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "DevExpressMvvm >= 19.2.3",
+      "InputInterceptor >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\PMM\\PMM.csproj",
+      "projectName": "PMM",
+      "projectPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\PMM\\PMM.csproj",
+      "packagesPath": "C:\\Users\\JerryAJ\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\PMM\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\JerryAJ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {
+            "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj": {
+              "projectPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "dependencies": {
+          "DevExpressMvvm": {
+            "target": "Package",
+            "version": "[19.2.3, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

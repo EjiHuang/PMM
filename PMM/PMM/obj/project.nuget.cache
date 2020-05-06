@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ptbloUNIzo8BXuBnBITUuPOuYnZAxb8JAXkGmtEN/RMjtdskt1JGdTEB8rTw9j+lc/cZJ3mOaO6VrMQbMj6KvQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\PMM\\PMM.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\devexpressmvvm\\19.2.3\\devexpressmvvm.19.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}

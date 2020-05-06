@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputInterceptor", "InputInterceptor\InputInterceptor.csproj", "{B37B64C0-7FEA-4746-A5DD-B94CDEDA11CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMM", "PMM\PMM.csproj", "{89E69E58-1A53-47DB-9B29-91B788CF96D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B37B64C0-7FEA-4746-A5DD-B94CDEDA11CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37B64C0-7FEA-4746-A5DD-B94CDEDA11CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37B64C0-7FEA-4746-A5DD-B94CDEDA11CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37B64C0-7FEA-4746-A5DD-B94CDEDA11CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E69E58-1A53-47DB-9B29-91B788CF96D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E69E58-1A53-47DB-9B29-91B788CF96D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E69E58-1A53-47DB-9B29-91B788CF96D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E69E58-1A53-47DB-9B29-91B788CF96D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5ECA8944-A473-4BA4-B11D-297B15BD0301}
+	EndGlobalSection
+EndGlobal
