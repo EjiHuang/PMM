@@ -318,10 +318,11 @@ namespace TosAutoSkill.ViewModel
         [Command]
         public void StartCommand(object obj)
         {
-            //var btn = obj as System.Windows.Controls.Button;
+            var btn = obj as System.Windows.Controls.Primitives.ToggleButton;
 
             if (string.IsNullOrWhiteSpace(HotKey.Key4Skill) || !(CD > 0))
             {
+                btn.IsChecked = false;
                 MessageBox.Show("请检查是否输入了快捷键和技能时间。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
