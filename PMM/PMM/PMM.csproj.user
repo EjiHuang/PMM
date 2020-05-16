@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resource\Icon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MainView.xaml">
       <SubType>Designer</SubType>
     </Page>

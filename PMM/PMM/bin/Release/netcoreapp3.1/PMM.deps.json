@@ -1,0 +1,56 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "PMM/1.0.0": {
+        "dependencies": {
+          "DevExpressMvvm": "19.2.3",
+          "InputInterceptor": "1.0.0"
+        },
+        "runtime": {
+          "PMM.dll": {}
+        }
+      },
+      "DevExpressMvvm/19.2.3": {
+        "runtime": {
+          "lib/netcoreapp3.0/DevExpress.Mvvm.UI.dll": {
+            "assemblyVersion": "19.2.0.0",
+            "fileVersion": "19.2.0.0"
+          },
+          "lib/netcoreapp3.0/DevExpress.Mvvm.dll": {
+            "assemblyVersion": "19.2.0.0",
+            "fileVersion": "19.2.0.0"
+          }
+        }
+      },
+      "InputInterceptor/1.0.0": {
+        "runtime": {
+          "InputInterceptor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PMM/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DevExpressMvvm/19.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QnZlv+9KmMaA0KSJ7xneiWF5Qxj7GG/iTUtB5ZdDIbroOzy3rZbfwbB7GcF6kiqUyzM2lf3cg1qV02Qr5vsGGg==",
+      "path": "devexpressmvvm/19.2.3",
+      "hashPath": "devexpressmvvm.19.2.3.nupkg.sha512"
+    },
+    "InputInterceptor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

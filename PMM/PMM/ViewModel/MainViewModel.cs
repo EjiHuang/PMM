@@ -315,10 +315,10 @@ namespace TosAutoSkill.ViewModel
 
         #region command
 
-        [AsyncCommand]
+        [Command]
         public void StartCommand(object obj)
         {
-            var btn = obj as System.Windows.Controls.Button;
+            //var btn = obj as System.Windows.Controls.Button;
 
             if (string.IsNullOrWhiteSpace(HotKey.Key4Skill) || !(CD > 0))
             {
@@ -329,8 +329,8 @@ namespace TosAutoSkill.ViewModel
             if (timer_auto_skill.IsEnabled)
             {
                 timer_auto_skill.Stop();
-                btn.Content = "停止中...";
-                btn.Foreground = Brushes.Black;
+                //btn.Content = "停止中...";
+                //btn.Foreground = Brushes.Black;
                 SetStatusInfo(Status_Flag.info, "Stopping...");
                 IsStopping = true;
             }
@@ -338,6 +338,9 @@ namespace TosAutoSkill.ViewModel
             {
                 process_target = Process.GetProcessesByName(ProcessInfoes[ProcessIndex].ProcessName)[0];
                 SetForegroundWindow(process_target.MainWindowHandle);
+
+                // 延迟
+                Thread.Sleep(TimeSpan.FromMilliseconds(500));
 
                 stroke_skill.Key.State = KeyState.Down;
                 InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
@@ -347,8 +350,8 @@ namespace TosAutoSkill.ViewModel
 
                 skill_invoke_time = DateTime.Now;
                 timer_auto_skill.Start();
-                btn.Content = "启动中...";
-                btn.Foreground = Brushes.Green;
+                //btn.Content = "启动中...";
+                //btn.Foreground = Brushes.Green;
                 SetStatusInfo(Status_Flag.info, "Running...");
                 IsStopping = false;
             }

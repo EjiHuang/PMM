@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--  添加图标  -->
+    <DrawingImage x:Key="svg_add">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+                <GeometryDrawing Brush="#FF0E932E" Geometry="F1 M1024,1024z M0,0z M942.6,383.8L640.1,383.8 640.1,81.3C640.1,37.3,604.1,1.3,560.1,1.3L463.9,1.3C419.9,1.3,383.9,37.3,383.9,81.3L383.9,383.8 81.4,383.8C37.4,383.8,1.40000000000001,419.8,1.40000000000001,463.8L1.40000000000001,560C1.40000000000001,604,37.4,640,81.4,640L383.9,640 383.9,942.5C383.9,986.5,419.9,1022.5,463.9,1022.5L560.1,1022.5C604.1,1022.5,640.1,986.5,640.1,942.5L640.1,640.1 942.6,640.1C986.6,640.1,1022.6,604.1,1022.6,560.1L1022.6,463.9C1022.6,419.8,986.6,383.8,942.6,383.8z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--  运行图标  -->
+    <DrawingImage x:Key="svg_play">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+                <GeometryDrawing Brush="#FF0E932E" Geometry="F1 M1024,1024z M0,0z M912.724884,429.355681L208.797545,13.198638C151.603449,-20.597874,64.01249,12.198741,64.01249,95.790112L64.01249,927.904219C64.01249,1002.896478,145.404089,1048.091813,208.797545,1010.495694L912.724884,594.53863C975.518402,557.542449,975.718382,466.351862,912.724884,429.355681z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--  暂停图标  -->
+    <DrawingImage x:Key="svg_stop">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+                <GeometryDrawing Brush="#FFD81E06" Geometry="F1 M1024,1024z M0,0z M950.857143,109.714286L950.857143,914.285714Q950.857143,929.142857 940,940 929.142857,950.857143 914.285714,950.857143L109.714286,950.857143Q94.857143,950.857143 84,940 73.142857,929.142857 73.142857,914.285714L73.142857,109.714286Q73.142857,94.857143 84,84 94.857143,73.142857 109.714286,73.142857L914.285714,73.142857Q929.142857,73.142857 940,84 950.857143,94.857143 950.857143,109.714286z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+</ResourceDictionary>
