@@ -1,0 +1,10 @@
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.Properties.Resources.resources
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.csproj.GenerateResource.cache
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.AssemblyInfoInputs.cache
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.AssemblyInfo.cs
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\bin\Debug\netcoreapp3.1\Eji.Interception.deps.json
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\bin\Debug\netcoreapp3.1\Eji.Interception.dll
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\bin\Debug\netcoreapp3.1\Eji.Interception.pdb
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.dll
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.pdb
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\Eji.Interception\obj\Debug\netcoreapp3.1\Eji.Interception.csproj.CoreCompileInputs.cache

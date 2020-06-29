@@ -5,6 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <SignAssembly>false</SignAssembly>
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,13 +16,17 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DevExpressMvvm" Version="19.2.3" />
+    <PackageReference Include="WpfScreenHelper" Version="0.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImageProcessor\ImageProcessor.csproj" />
     <ProjectReference Include="..\InputInterceptor\InputInterceptor.csproj" />
   </ItemGroup>
 

@@ -4,8 +4,76 @@
     "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\PMM\\PMM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj": {
+    "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\ImageProcessor.csproj": {
       "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\ImageProcessor.csproj",
+        "projectName": "ImageProcessor",
+        "projectPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\ImageProcessor.csproj",
+        "packagesPath": "C:\\Users\\JerryAJ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\JerryAJ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "OpenCvSharp4": {
+              "target": "Package",
+              "version": "[4.3.0.20200524, )"
+            },
+            "OpenCvSharp4.runtime.win": {
+              "target": "Package",
+              "version": "[4.3.0.20200524, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj": {
       "restore": {
         "projectUniqueName": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj",
         "projectName": "InputInterceptor",
@@ -41,6 +109,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\ImageProcessor.csproj": {
+                "projectPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\ImageProcessor.csproj"
+              },
               "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj": {
                 "projectPath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\InputInterceptor\\InputInterceptor.csproj"
               }
@@ -59,6 +130,10 @@
             "DevExpressMvvm": {
               "target": "Package",
               "version": "[19.2.3, )"
+            },
+            "WpfScreenHelper": {
+              "target": "Package",
+              "version": "[0.4.0, )"
             }
           },
           "imports": [
@@ -79,7 +154,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

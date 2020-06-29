@@ -1,0 +1,9 @@
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\bin\Debug\netcoreapp3.1\ImageProcessor.deps.json
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\bin\Debug\netcoreapp3.1\ImageProcessor.dll
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\obj\Debug\netcoreapp3.1\ImageProcessor.AssemblyInfoInputs.cache
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\obj\Debug\netcoreapp3.1\ImageProcessor.AssemblyInfo.cs
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\bin\Debug\netcoreapp3.1\ImageProcessor.pdb
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\obj\Debug\netcoreapp3.1\ImageProcessor.dll
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\obj\Debug\netcoreapp3.1\ImageProcessor.pdb
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\obj\Debug\netcoreapp3.1\ImageProcessor.csprojAssemblyReference.cache
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\ImageProcessor\obj\Debug\netcoreapp3.1\ImageProcessor.csproj.CoreCompileInputs.cache

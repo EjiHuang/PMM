@@ -1,5 +1,5 @@
 ﻿PMM
-
+1.0.0.0
 
 winexe
 C#
@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\App.xaml
-1-449290888
+3447501248
 
-7-500330269
-195126768054
-View\MainView.xaml;
+11-1955695024
+2011259903747
+Resource\Icon.xaml;View\CaptureMarkView.xaml;View\MainView.xaml;
 
 True
 

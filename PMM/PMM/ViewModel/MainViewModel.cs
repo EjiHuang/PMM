@@ -1,15 +1,22 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm.Native;
+using ImageProcessor;
 using InputInterceptorNS;
+using PMM.Framwork;
 using PMM.Model;
+using PMM.View;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using TOS_TW_TOOL.Models;
 
@@ -107,6 +114,24 @@ namespace TosAutoSkill.ViewModel
         /// </summary>
         public bool IsWinActive = true;
 
+        /// <summary>
+        /// 是否开启图像识别功能
+        /// </summary>
+        public bool IsEnableImageRecognition
+        {
+            get => GetProperty(() => IsEnableImageRecognition);
+            set => SetProperty(() => IsEnableImageRecognition, value);
+        }
+
+        /// <summary>
+        /// 截图图像
+        /// </summary>
+        public BitmapSource CaptureImage
+        {
+            get => GetProperty(() => CaptureImage);
+            set => SetProperty(() => CaptureImage, value);
+        }
+
         #endregion
 
         #region private
@@ -142,9 +167,24 @@ namespace TosAutoSkill.ViewModel
         private DateTime skill_invoke_time = DateTime.Now;
 
         /// <summary>
+        /// 当前截图对象
+        /// </summary>
+        private Bitmap curr_caputure;
+
+        /// <summary>
         /// 目标进程
         /// </summary>
         private Process process_target;
+
+        /// <summary>
+        /// 程序窗口位图
+        /// </summary>
+        private Bitmap process_window_bitmap;
+
+        /// <summary>
+        /// 截图遮罩窗口
+        /// </summary>
+        private CaptureMarkView capture_mark_view;
 
         #endregion
 
@@ -167,6 +207,27 @@ namespace TosAutoSkill.ViewModel
         /// </summary>
         private void Init()
         {
+            // 默认开启图像识别功能
+            IsEnableImageRecognition = true;
+            if (File.Exists("caputure.bmp"))
+            {
+                curr_caputure = new Bitmap("caputure.bmp");
+                CaptureImage = BitmapProcessor.BitmapToImageSource(curr_caputure);
+            }
+            else
+            {
+                DrawingImage svgCapture = Application.Current.Resources["svg_capture"] as DrawingImage;
+                DrawingVisual drawingVisual = new DrawingVisual();
+                DrawingContext drawingContext = drawingVisual.RenderOpen();
+                drawingContext.DrawImage(svgCapture, new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(svgCapture.Width, svgCapture.Height)));
+                drawingContext.Close();
+
+                RenderTargetBitmap bmp = new RenderTargetBitmap((int)svgCapture.Width, (int)svgCapture.Height, 96, 96, PixelFormats.Pbgra32);
+                bmp.Render(drawingVisual);
+
+                CaptureImage = bmp;
+            }
+
             // 获取高权限令牌
             using Process p = Process.GetCurrentProcess();
             p.PriorityClass = ProcessPriorityClass.High;
@@ -233,19 +294,71 @@ namespace TosAutoSkill.ViewModel
                 {
                     if (GetForegroundWindow() == process_target.MainWindowHandle)
                     {
-                        stroke_skill.Key.State = KeyState.Down;
-                        InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-                        Thread.Sleep(rnd.Next(1, 50));
-                        stroke_skill.Key.State = KeyState.Up;
-                        InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
+                        if (IsEnableImageRecognition)
+                        {
+                            GetWindowRect(process_target.MainWindowHandle, out Rectangle rect);
 
-                        // 重置
-                        skill_invoke_time = DateTime.Now;
-                        SetStatusInfo(Status_Flag.info, "Running...");
+                            try
+                            {
+                                process_window_bitmap = new Bitmap(rect.Width - rect.X, rect.Height - rect.Y);
+                                using Graphics g = Graphics.FromImage(process_window_bitmap);
+                                g.CopyFromScreen(rect.X, rect.Y, 0, 0, process_window_bitmap.Size);
+
+                                if (curr_caputure != null)
+                                {
+                                    // var image_checker = new ImageChecker(process_window_bitmap, curr_caputure);
+                                    DateTime begin = DateTime.Now;
+
+                                    var pos = ImageRecognition.GetSubPositionsOpenCV(process_window_bitmap, curr_caputure);
+
+                                    var time = (DateTime.Now - begin).TotalMilliseconds;
+
+                                    if (pos.Count == 1)
+                                    {
+                                        Debug.WriteLine($"[{pos[0].X},{pos[0].Y}]");
+
+                                        stroke_skill.Key.State = KeyState.Down;
+                                        InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
+                                        Thread.Sleep(rnd.Next(1, 50));
+                                        stroke_skill.Key.State = KeyState.Up;
+                                        InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
+                                    }
+                                    else
+                                    {
+                                        Debug.WriteLine("NG");
+                                    }
+
+                                    // 重置
+                                    skill_invoke_time = DateTime.Now;
+                                    SetStatusInfo(Status_Flag.info, $"Running... matched[{pos.Count}]: {time} ms");
+                                }
+                                else
+                                {
+                                    SetStatusInfo(Status_Flag.err, $"Capture bitmap is null.");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                                throw;
+                            }
+                        }
+                        else
+                        {
+                            stroke_skill.Key.State = KeyState.Down;
+                            InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
+                            Thread.Sleep(rnd.Next(1, 50));
+                            stroke_skill.Key.State = KeyState.Up;
+                            InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
+
+                            // 重置
+                            skill_invoke_time = DateTime.Now;
+                            SetStatusInfo(Status_Flag.info, "Running...");
+                        }
                     }
                     else
                     {
-                        SetStatusInfo(Status_Flag.err, "Foreground window isnt tos.");
+                        SetStatusInfo(Status_Flag.err, $"Foreground window isnt {process_target.ProcessName}.");
                     }
                 }
             }
@@ -353,9 +466,25 @@ namespace TosAutoSkill.ViewModel
                 timer_auto_skill.Start();
                 //btn.Content = "启动中...";
                 //btn.Foreground = Brushes.Green;
+                //btn.Foreground =  Brushes.Green;
                 SetStatusInfo(Status_Flag.info, "Running...");
                 IsStopping = false;
             }
+        }
+
+        [Command]
+        public void CaptureCommand(object obj)
+        {
+            // System.Windows.Controls.Image image = obj as System.Windows.Controls.Image;
+            capture_mark_view = new CaptureMarkView();
+            capture_mark_view.Closing += (sender, e) =>
+              {
+                  curr_caputure?.Dispose();
+                  curr_caputure = capture_mark_view.bitmap;
+                  curr_caputure.Save("caputure.bmp", ImageFormat.Bmp);
+                  CaptureImage = BitmapProcessor.BitmapToImageSource(curr_caputure);
+              };
+            capture_mark_view.Show();
         }
 
         #endregion
@@ -363,7 +492,11 @@ namespace TosAutoSkill.ViewModel
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
+
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
     }
 }

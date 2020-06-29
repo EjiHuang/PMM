@@ -9,7 +9,9 @@
       "PMM/1.0.0": {
         "dependencies": {
           "DevExpressMvvm": "19.2.3",
-          "InputInterceptor": "1.0.0"
+          "ImageProcessor": "1.0.0",
+          "InputInterceptor": "1.0.0",
+          "WpfScreenHelper": "0.4.0"
         },
         "runtime": {
           "PMM.dll": {}
@@ -25,6 +27,98 @@
             "assemblyVersion": "19.2.0.0",
             "fileVersion": "19.2.0.0"
           }
+        }
+      },
+      "Microsoft.NETCore.Platforms/3.1.0": {},
+      "Microsoft.Win32.SystemEvents/4.7.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0"
+        }
+      },
+      "OpenCvSharp4/4.3.0.20200524": {
+        "dependencies": {
+          "System.Drawing.Common": "4.7.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.7.1"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/OpenCvSharp.Blob.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/netcoreapp3.1/OpenCvSharp.Extensions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/netcoreapp3.1/OpenCvSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OpenCvSharp4.runtime.win/4.3.0.20200524": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/OpenCvSharpExtern.pdb": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg430_64.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/OpenCvSharpExtern.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/OpenCvSharpExtern.pdb": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/opencv_videoio_ffmpeg430.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "System.Drawing.Common/4.7.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0",
+          "Microsoft.Win32.SystemEvents": "4.7.0"
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.7.1": {
+        "runtime": {
+          "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "4.0.6.0",
+            "fileVersion": "4.700.20.12001"
+          }
+        }
+      },
+      "WpfScreenHelper/0.4.0": {
+        "runtime": {
+          "lib/netcoreapp3.0/WpfScreenHelper.dll": {
+            "assemblyVersion": "0.4.0.0",
+            "fileVersion": "0.4.0.0"
+          }
+        }
+      },
+      "ImageProcessor/1.0.0": {
+        "dependencies": {
+          "OpenCvSharp4": "4.3.0.20200524",
+          "OpenCvSharp4.runtime.win": "4.3.0.20200524",
+          "System.Drawing.Common": "4.7.0"
+        },
+        "runtime": {
+          "ImageProcessor.dll": {}
         }
       },
       "InputInterceptor/1.0.0": {
@@ -46,6 +140,60 @@
       "sha512": "sha512-QnZlv+9KmMaA0KSJ7xneiWF5Qxj7GG/iTUtB5ZdDIbroOzy3rZbfwbB7GcF6kiqUyzM2lf3cg1qV02Qr5vsGGg==",
       "path": "devexpressmvvm/19.2.3",
       "hashPath": "devexpressmvvm.19.2.3.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
+      "path": "microsoft.netcore.platforms/3.1.0",
+      "hashPath": "microsoft.netcore.platforms.3.1.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.SystemEvents/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
+      "path": "microsoft.win32.systemevents/4.7.0",
+      "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
+    },
+    "OpenCvSharp4/4.3.0.20200524": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OO6s1WoUl4mmAXzIbTWHBciXqZqaeAWyhBbtMMI6POBK9KxZ1/zA2W9EK0tw6qJsU7/CO2ARWqJgvBXAOFniiw==",
+      "path": "opencvsharp4/4.3.0.20200524",
+      "hashPath": "opencvsharp4.4.3.0.20200524.nupkg.sha512"
+    },
+    "OpenCvSharp4.runtime.win/4.3.0.20200524": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NCU7VOQbLXZP62vc/xCSPBREB0gTZa6wqVcxm2R31FlvMajsSsxPSGVngXbdPL1/UwhWsR4YDHLOg9RctBUWfg==",
+      "path": "opencvsharp4.runtime.win/4.3.0.20200524",
+      "hashPath": "opencvsharp4.runtime.win.4.3.0.20200524.nupkg.sha512"
+    },
+    "System.Drawing.Common/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v+XbyYHaZjDfn0ENmJEV1VYLgGgCTx1gnfOBcppowbpOAriglYgGCvFCPr2EEZyBvXlpxbEsTwkOlInl107ahA==",
+      "path": "system.drawing.common/4.7.0",
+      "hashPath": "system.drawing.common.4.7.0.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zOHkQmzPCn5zm/BH+cxC1XbUS3P4Yoi3xzW7eRgVpDR2tPGSzyMZ17Ig1iRkfJuY0nhxkQQde8pgePNiA7z7TQ==",
+      "path": "system.runtime.compilerservices.unsafe/4.7.1",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512"
+    },
+    "WpfScreenHelper/0.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2HGQTDXkyoWk7O5c1uLyk88Q/EaEcLUHXkBokV5l1hUMKs48WNsxx95JEdfUozk0RkgpIms7sLL0y0xM5hxs3g==",
+      "path": "wpfscreenhelper/0.4.0",
+      "hashPath": "wpfscreenhelper.0.4.0.nupkg.sha512"
+    },
+    "ImageProcessor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "InputInterceptor/1.0.0": {
       "type": "project",
