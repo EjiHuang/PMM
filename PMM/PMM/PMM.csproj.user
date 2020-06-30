@@ -7,12 +7,18 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Control\WatcherControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CaptureMarkView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Resource\Icon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Control\WatcherControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CaptureMarkView.xaml">

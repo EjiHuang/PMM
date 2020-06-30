@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\App.xaml
-3447501248
+4-1273679688
 
-11-1955695024
+131548162958
 2011259903747
-Resource\Icon.xaml;View\CaptureMarkView.xaml;View\MainView.xaml;
+Control\WatcherControl.xaml;Resource\Icon.xaml;View\CaptureMarkView.xaml;View\MainView.xaml;
 
-True
+False
 

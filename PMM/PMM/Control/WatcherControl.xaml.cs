@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PMM.ViewModel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,36 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PMM
+namespace PMM.Control
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// UC_Watcher.xaml 的交互逻辑
     /// </summary>
-    public partial class MainView : Window
+    public partial class WatcherControl : UserControl
     {
-        public MainView()
+        public WatcherControl()
         {
             InitializeComponent();
-        }
 
-        private void MainWindow_Deactivated(object sender, EventArgs e)
-        {
-            MainVM.IsWinActive = false;
-        }
-
-        private void MainWindow_Activated(object sender, EventArgs e)
-        {
-            MainVM.IsWinActive = true;
-        }
-
-        private void MainWindow_Closed(object sender, EventArgs e)
-        {
-            MainVM.Close();
-        }
-
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = new WatcherViewModel(Application.Current.MainWindow.DataContext as MainViewModel);
         }
     }
 

@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="TosAutoSkill.App"
+    x:Class="PMM.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:TosAutoSkill"
+    xmlns:local="clr-namespace:PMM"
     StartupUri="View/MainView.xaml">
     <Application.Resources>
         <ResourceDictionary>

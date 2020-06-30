@@ -1,30 +1,21 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm.Native;
-using ImageProcessor;
 using InputInterceptorNS;
-using PMM.Framwork;
 using PMM.Model;
 using PMM.View;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using TOS_TW_TOOL.Models;
 
-namespace TosAutoSkill.ViewModel
+namespace PMM.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        enum Status_Flag
+        public enum Status_Flag
         {
             info = 1,
             err = 0
@@ -40,6 +31,12 @@ namespace TosAutoSkill.ViewModel
         #endregion
 
         #region public
+
+        /// <summary>
+        /// 委托用于启动
+        /// </summary>
+        public delegate void StartPMM(System.Windows.Controls.Primitives.ToggleButton btn);
+        public StartPMM StartDel;
 
         /// <summary>
         /// 进程信息集合
@@ -71,24 +68,6 @@ namespace TosAutoSkill.ViewModel
         {
             get => GetProperty(() => StatusText);
             set => SetProperty(() => StatusText, value);
-        }
-
-        /// <summary>
-        /// 快捷键
-        /// </summary>
-        public HotKeyModel HotKey
-        {
-            get => GetProperty(() => HotKey);
-            set => SetProperty(() => HotKey, value);
-        }
-
-        /// <summary>
-        /// 技能CD
-        /// </summary>
-        public int CD
-        {
-            get => GetProperty(() => CD);
-            set => SetProperty(() => CD, value);
         }
 
         /// <summary>
@@ -124,67 +103,38 @@ namespace TosAutoSkill.ViewModel
         }
 
         /// <summary>
-        /// 截图图像
-        /// </summary>
-        public BitmapSource CaptureImage
-        {
-            get => GetProperty(() => CaptureImage);
-            set => SetProperty(() => CaptureImage, value);
-        }
-
-        #endregion
-
-        #region private
-
-        /// <summary>
-        /// 随机数生成器
-        /// </summary>
-        private readonly Random rnd = new Random();
-
-        /// <summary>
-        /// 后台执行定时器
-        /// </summary>
-        private readonly DispatcherTimer timer_auto_skill = new DispatcherTimer();
-
-        /// <summary>
-        /// 拦截器上下文
-        /// </summary>
-        private IntPtr interception_context;
-
-        /// <summary>
-        /// 用于拦截器的设备号
-        /// </summary>
-        private int keyboard_device;
-
-        /// <summary>
-        /// SP药水键冲程
-        /// </summary>
-        private Stroke stroke_skill = new Stroke();
-
-        /// <summary>
-        /// 用于记录技能触发时间
-        /// </summary>
-        private DateTime skill_invoke_time = DateTime.Now;
-
-        /// <summary>
-        /// 当前截图对象
-        /// </summary>
-        private Bitmap curr_caputure;
-
-        /// <summary>
         /// 目标进程
         /// </summary>
-        private Process process_target;
+        public Process Process_Target;
 
         /// <summary>
         /// 程序窗口位图
         /// </summary>
-        private Bitmap process_window_bitmap;
+        public Bitmap Process_Window_Bitmap;
+
+        /// <summary>
+        /// 随机数生成器
+        /// </summary>
+        public readonly Random RND = new Random();
+
+        /// <summary>
+        /// 拦截器上下文
+        /// </summary>
+        public IntPtr Interception_Context;
+
+        /// <summary>
+        /// 用于拦截器的设备号
+        /// </summary>
+        public int Keyboard_Device;
 
         /// <summary>
         /// 截图遮罩窗口
         /// </summary>
-        private CaptureMarkView capture_mark_view;
+        public CaptureMarkView Capture_Mark_View;
+
+        #endregion
+
+        #region private
 
         #endregion
 
@@ -198,6 +148,25 @@ namespace TosAutoSkill.ViewModel
             // InputInterceptor.Dispose();
         }
 
+        /// <summary>
+        /// 设置状态栏信息
+        /// </summary>
+        /// <param name="flag"></param>
+        /// <param name="text"></param>
+        public void SetStatusInfo(Status_Flag flag, string text)
+        {
+            if (flag == Status_Flag.err)
+            {
+                StatusFlag = "Error";
+                StatusText = text;
+            }
+            else
+            {
+                StatusFlag = "Info";
+                StatusText = text;
+            }
+        }
+
         #endregion
 
         #region private method
@@ -207,27 +176,6 @@ namespace TosAutoSkill.ViewModel
         /// </summary>
         private void Init()
         {
-            // 默认开启图像识别功能
-            IsEnableImageRecognition = true;
-            if (File.Exists("caputure.bmp"))
-            {
-                curr_caputure = new Bitmap("caputure.bmp");
-                CaptureImage = BitmapProcessor.BitmapToImageSource(curr_caputure);
-            }
-            else
-            {
-                DrawingImage svgCapture = Application.Current.Resources["svg_capture"] as DrawingImage;
-                DrawingVisual drawingVisual = new DrawingVisual();
-                DrawingContext drawingContext = drawingVisual.RenderOpen();
-                drawingContext.DrawImage(svgCapture, new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(svgCapture.Width, svgCapture.Height)));
-                drawingContext.Close();
-
-                RenderTargetBitmap bmp = new RenderTargetBitmap((int)svgCapture.Width, (int)svgCapture.Height, 96, 96, PixelFormats.Pbgra32);
-                bmp.Render(drawingVisual);
-
-                CaptureImage = bmp;
-            }
-
             // 获取高权限令牌
             using Process p = Process.GetCurrentProcess();
             p.PriorityClass = ProcessPriorityClass.High;
@@ -246,121 +194,15 @@ namespace TosAutoSkill.ViewModel
                 if (InputInterceptor.Initialize())
                 {
                     // 获取拦截器上下文及键盘设备
-                    interception_context = InputInterceptor.CreateContext();
-                    var lt = InputInterceptor.GetDeviceList(interception_context);
-                    keyboard_device = lt.Where(o => { return InputInterceptor.IsKeyboard(o.Device); }).FirstOrDefault().Device;
-
-                    // 初始化成员对象
-                    HotKey = new HotKeyModel
-                    {
-                        // 初始化热键设置
-                        Key4SkillEnable = true,
-                        HotKeyTextBoxFocusable4Skill = false
-                    };
-
-                    // 键盘Hook，用于获取热键设置
-                    KeyboardHook keyboardHook = new KeyboardHook((ref KeyStroke keyStroke) =>
-                    {
-                        if (IsWinActive)
-                        {
-                            if (HotKey.HotKeyTextBoxFocusable4Skill)
-                            {
-                                HotKey.Key4Skill = keyStroke.Code.ToString();
-                                stroke_skill.Key.Code = keyStroke.Code;
-                                // HotKey.HotKeyTextBoxFocusable4Skill = false;
-                            }
-                        }
-                    });
+                    Interception_Context = InputInterceptor.CreateContext();
+                    var lt = InputInterceptor.GetDeviceList(Interception_Context);
+                    Keyboard_Device = lt.Where(o => { return InputInterceptor.IsKeyboard(o.Device); }).FirstOrDefault().Device;
                 }
             }
             else
             {
                 SetStatusInfo(Status_Flag.err, "Input interceptor initialization failed.");
                 MessageBox.Show("Input interceptor initialization failed.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            timer_auto_skill.Tick += Timer_auto_skill_Tick;
-            timer_auto_skill.Interval = TimeSpan.FromSeconds(1);
-
-            IsStopping = true;
-        }
-
-        private void Timer_auto_skill_Tick(object sender, EventArgs e)
-        {
-            if (HotKey.Key4SkillEnable && (!string.IsNullOrWhiteSpace(HotKey.Key4Skill)) && CD > 0)
-            {
-                Thread.Sleep(rnd.Next(1, 50));
-                if ((DateTime.Now - skill_invoke_time).TotalSeconds > CD)
-                {
-                    if (GetForegroundWindow() == process_target.MainWindowHandle)
-                    {
-                        if (IsEnableImageRecognition)
-                        {
-                            GetWindowRect(process_target.MainWindowHandle, out Rectangle rect);
-
-                            try
-                            {
-                                process_window_bitmap = new Bitmap(rect.Width - rect.X, rect.Height - rect.Y);
-                                using Graphics g = Graphics.FromImage(process_window_bitmap);
-                                g.CopyFromScreen(rect.X, rect.Y, 0, 0, process_window_bitmap.Size);
-
-                                if (curr_caputure != null)
-                                {
-                                    // var image_checker = new ImageChecker(process_window_bitmap, curr_caputure);
-                                    DateTime begin = DateTime.Now;
-
-                                    var pos = ImageRecognition.GetSubPositionsOpenCV(process_window_bitmap, curr_caputure);
-
-                                    var time = (DateTime.Now - begin).TotalMilliseconds;
-
-                                    if (pos.Count == 1)
-                                    {
-                                        Debug.WriteLine($"[{pos[0].X},{pos[0].Y}]");
-
-                                        stroke_skill.Key.State = KeyState.Down;
-                                        InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-                                        Thread.Sleep(rnd.Next(1, 50));
-                                        stroke_skill.Key.State = KeyState.Up;
-                                        InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-                                    }
-                                    else
-                                    {
-                                        Debug.WriteLine("NG");
-                                    }
-
-                                    // 重置
-                                    skill_invoke_time = DateTime.Now;
-                                    SetStatusInfo(Status_Flag.info, $"Running... matched[{pos.Count}]: {time} ms");
-                                }
-                                else
-                                {
-                                    SetStatusInfo(Status_Flag.err, $"Capture bitmap is null.");
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-                                throw;
-                            }
-                        }
-                        else
-                        {
-                            stroke_skill.Key.State = KeyState.Down;
-                            InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-                            Thread.Sleep(rnd.Next(1, 50));
-                            stroke_skill.Key.State = KeyState.Up;
-                            InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-
-                            // 重置
-                            skill_invoke_time = DateTime.Now;
-                            SetStatusInfo(Status_Flag.info, "Running...");
-                        }
-                    }
-                    else
-                    {
-                        SetStatusInfo(Status_Flag.err, $"Foreground window isnt {process_target.ProcessName}.");
-                    }
-                }
             }
         }
 
@@ -405,25 +247,6 @@ namespace TosAutoSkill.ViewModel
             }
         }
 
-        /// <summary>
-        /// 设置状态栏信息
-        /// </summary>
-        /// <param name="flag"></param>
-        /// <param name="text"></param>
-        private void SetStatusInfo(Status_Flag flag, string text)
-        {
-            if (flag == Status_Flag.err)
-            {
-                StatusFlag = "Error";
-                StatusText = text;
-            }
-            else
-            {
-                StatusFlag = "Info";
-                StatusText = text;
-            }
-        }
-
         #endregion
 
         #region command
@@ -433,70 +256,19 @@ namespace TosAutoSkill.ViewModel
         {
             var btn = obj as System.Windows.Controls.Primitives.ToggleButton;
 
-            if (string.IsNullOrWhiteSpace(HotKey.Key4Skill) || !(CD > 0))
-            {
-                btn.IsChecked = false;
-                MessageBox.Show("请检查是否输入了快捷键和技能时间。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (timer_auto_skill.IsEnabled)
-            {
-                timer_auto_skill.Stop();
-                //btn.Content = "停止中...";
-                //btn.Foreground = Brushes.Black;
-                SetStatusInfo(Status_Flag.info, "Stopping...");
-                IsStopping = true;
-            }
-            else
-            {
-                process_target = Process.GetProcessesByName(ProcessInfoes[ProcessIndex].ProcessName)[0];
-                SetForegroundWindow(process_target.MainWindowHandle);
-
-                // 延迟
-                Thread.Sleep(TimeSpan.FromMilliseconds(500));
-
-                stroke_skill.Key.State = KeyState.Down;
-                InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-                Thread.Sleep(rnd.Next(1, 50));
-                stroke_skill.Key.State = KeyState.Up;
-                InputInterceptor.Send(interception_context, keyboard_device, ref stroke_skill, 1);
-
-                skill_invoke_time = DateTime.Now;
-                timer_auto_skill.Start();
-                //btn.Content = "启动中...";
-                //btn.Foreground = Brushes.Green;
-                //btn.Foreground =  Brushes.Green;
-                SetStatusInfo(Status_Flag.info, "Running...");
-                IsStopping = false;
-            }
-        }
-
-        [Command]
-        public void CaptureCommand(object obj)
-        {
-            // System.Windows.Controls.Image image = obj as System.Windows.Controls.Image;
-            capture_mark_view = new CaptureMarkView();
-            capture_mark_view.Closing += (sender, e) =>
-              {
-                  curr_caputure?.Dispose();
-                  curr_caputure = capture_mark_view.bitmap;
-                  curr_caputure.Save("caputure.bmp", ImageFormat.Bmp);
-                  CaptureImage = BitmapProcessor.BitmapToImageSource(curr_caputure);
-              };
-            capture_mark_view.Show();
+            StartDel?.Invoke(btn);
         }
 
         #endregion
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
+        public static extern IntPtr GetForegroundWindow();
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
+        public static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
     }
 }

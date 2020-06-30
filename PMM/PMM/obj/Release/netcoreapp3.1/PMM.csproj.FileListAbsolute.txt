@@ -36,3 +36,5 @@ C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Release\netcoreapp3.1\PMM.cspro
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Release\netcoreapp3.1\PMM.csproj.CopyComplete
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Release\netcoreapp3.1\PMM.dll
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Release\netcoreapp3.1\PMM.genruntimeconfig.cache
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Release\netcoreapp3.1\Control\WatcherControl.g.cs
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Release\netcoreapp3.1\Control\WatcherControl.baml

@@ -62,7 +62,7 @@ namespace PMM.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PMM;V1.0.0.0;component/view/capturemarkview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PMM;component/view/capturemarkview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\CaptureMarkView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
