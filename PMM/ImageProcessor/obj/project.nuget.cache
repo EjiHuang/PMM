@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "H75DngEF2G2QqNy9a5qOFb3rWDm+bpqU6JVxuMkzyVMfweXvhF5b8DFlgWxMfK5kTNTi9AVYXN8cKbcF6zlfYg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\JerryAJ\\OneDrive\\Github\\PMM\\PMM\\ImageProcessor\\ImageProcessor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\opencvsharp4\\4.3.0.20200524\\opencvsharp4.4.3.0.20200524.nupkg.sha512",
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\opencvsharp4.runtime.win\\4.3.0.20200524\\opencvsharp4.runtime.win.4.3.0.20200524.nupkg.sha512",
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\JerryAJ\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.1\\system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}
