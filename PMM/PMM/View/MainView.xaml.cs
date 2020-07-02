@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PMM.Control;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,16 @@ namespace PMM
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            WatcherControl watcher = new WatcherControl
+            { Height = 50 };
 
+            Height += 50;
+
+            Grid.SetRow(watcher, WatcherGrid.RowDefinitions.Count);
+            WatcherGrid.RowDefinitions.Add(new RowDefinition());
+            WatcherGrid.Children.Add(watcher);
+
+            int a = Grid.GetRow(watcher);
         }
     }
 

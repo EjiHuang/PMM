@@ -1,5 +1,5 @@
 ﻿PMM
-1.0.0.0
+1.1.0.0
 
 winexe
 C#
@@ -16,5 +16,5 @@ C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\App.xaml
 201-647158491
 Control\WatcherControl.xaml;Resource\Icon.xaml;View\CaptureMarkView.xaml;View\MainView.xaml;
 
-True
+False
 

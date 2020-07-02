@@ -15,7 +15,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using TOS_TW_TOOL.Models;
+using System.Xml.Linq;
 using static PMM.ViewModel.MainViewModel;
+using System.Linq;
+using System.Xml;
 
 namespace PMM.ViewModel
 {
@@ -23,10 +26,12 @@ namespace PMM.ViewModel
     {
         #region ctor
 
-        public WatcherViewModel(MainViewModel mainVM)
+        public WatcherViewModel(int row_id)
         {
-            // 传递主视图模型
-            MainVM = mainVM;
+            // 当前控件的row编号作为xml路径索引
+            Index = row_id;
+            // 获取主视图模型
+            MainVM = Application.Current.MainWindow.DataContext as MainViewModel;
             // 初始化
             Init();
         }
@@ -36,6 +41,8 @@ namespace PMM.ViewModel
         #region public
 
         public MainViewModel MainVM { get; set; }
+
+        public int Index { get; set; }
 
         /// <summary>
         /// 快捷键
@@ -88,15 +95,28 @@ namespace PMM.ViewModel
         /// </summary>
         private DateTime invoke_time = DateTime.Now;
 
+        /// <summary>
+        /// xml reader
+        /// </summary>
+        private readonly XDocument xml = XDocument.Load(@"config.xml");
+
+        /// <summary>
+        /// 进程窗口位图
+        /// </summary>
+        // private Bitmap process_window_bitmap;
+
         #endregion
 
         #region private method
 
         private void Init()
         {
-            if (File.Exists("caputure.bmp"))
+            // 获取截图路径数组
+            var cap = xml.Element("config").Element("cap").Elements().ToList();
+
+            if (cap.Count > Index && File.Exists(cap[Index].Value))
             {
-                curr_caputure = new Bitmap("caputure.bmp");
+                curr_caputure = new Bitmap(cap[Index].Value);
                 CaptureImage = BitmapProcessor.BitmapToImageSource(curr_caputure);
             }
             else
@@ -149,7 +169,7 @@ namespace PMM.ViewModel
             if (string.IsNullOrWhiteSpace(HotKey.Key4Skill) || !(CD > 0))
             {
                 btn.IsChecked = false;
-                MessageBox.Show("请检查是否输入了快捷键和冷却时间。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("请检查是否输入了快捷键和间隔时间。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -198,16 +218,16 @@ namespace PMM.ViewModel
 
                             try
                             {
-                                MainVM.Process_Window_Bitmap = new Bitmap(rect.Width - rect.X, rect.Height - rect.Y);
-                                using Graphics g = Graphics.FromImage(MainVM.Process_Window_Bitmap);
-                                g.CopyFromScreen(rect.X, rect.Y, 0, 0, MainVM.Process_Window_Bitmap.Size);
+                                using var process_window_bitmap = new Bitmap(rect.Width - rect.X, rect.Height - rect.Y);
+                                using Graphics g = Graphics.FromImage(process_window_bitmap);
+                                g.CopyFromScreen(rect.X, rect.Y, 0, 0, process_window_bitmap.Size);
 
                                 if (curr_caputure != null)
                                 {
                                     // var image_checker = new ImageChecker(process_window_bitmap, curr_caputure);
                                     DateTime begin = DateTime.Now;
 
-                                    var pos = ImageRecognition.GetSubPositionsOpenCV(MainVM.Process_Window_Bitmap, curr_caputure);
+                                    var pos = ImageRecognition.GetSubPositionsOpenCV(process_window_bitmap, curr_caputure);
 
                                     var time = (DateTime.Now - begin).TotalMilliseconds;
 
@@ -228,7 +248,16 @@ namespace PMM.ViewModel
 
                                     // 重置
                                     invoke_time = DateTime.Now;
-                                    MainVM.SetStatusInfo(Status_Flag.info, $"Running... matched[{pos.Count}]: {time} ms");
+
+                                    // 显示
+                                    if (pos.Count == 1)
+                                    {
+                                        MainVM.SetStatusInfo(Status_Flag.info, $"Running... [match success] [{time} ms]");
+                                    }
+                                    else
+                                    {
+                                        MainVM.SetStatusInfo(Status_Flag.info, $"Running... [match failed] [{time} ms]");
+                                    }
                                 }
                                 else
                                 {
@@ -275,8 +304,12 @@ namespace PMM.ViewModel
             {
                 curr_caputure?.Dispose();
                 curr_caputure = MainVM.Capture_Mark_View.bitmap;
-                curr_caputure.Save("caputure.bmp", ImageFormat.Bmp);
+                curr_caputure.Save(@$"./capture/cap-{Index}.bmp", ImageFormat.Bmp);
                 CaptureImage = BitmapProcessor.BitmapToImageSource(curr_caputure);
+
+                // 记录到config.xml中
+                xml.Element("config").Element("cap").Add(new XElement("path", @$"./capture/cap-{Index}.bmp"));
+                xml.Save(@"config.xml");
             };
             MainVM.Capture_Mark_View.Show();
         }

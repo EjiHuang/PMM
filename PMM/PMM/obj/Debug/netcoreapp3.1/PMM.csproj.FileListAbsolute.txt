@@ -42,3 +42,4 @@ C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\bin\Debug\netcoreapp3.1\runtimes\wi
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\opencv_videoio_ffmpeg430.dll
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Debug\netcoreapp3.1\Control\WatcherControl.g.cs
 C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\obj\Debug\netcoreapp3.1\Control\WatcherControl.baml
+C:\Users\JerryAJ\OneDrive\Github\PMM\PMM\PMM\bin\Debug\netcoreapp3.1\config.xml

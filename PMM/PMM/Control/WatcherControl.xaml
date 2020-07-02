@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:PMM.Control"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:PMM.ViewModel"
+    Loaded="UserControl_Loaded"
     mc:Ignorable="d">
     <StackPanel
         VerticalAlignment="Center"
@@ -34,7 +35,7 @@
             VerticalAlignment="Center"
             FontSize="16"
             Foreground="White"
-            Text=" 快捷键: " />
+            Text=" 按键: " />
         <TextBox
             Width="70"
             Margin="0,0,6,0"
@@ -44,14 +45,14 @@
             FontSize="16"
             FontWeight="Bold"
             Foreground="White"
-            IsEnabled="{Binding IsStopping}"
+            IsEnabled="{Binding MainVM.IsStopping}"
             IsReadOnly="True"
             Text="{Binding HotKey.Key4Skill}" />
         <TextBlock
             VerticalAlignment="Center"
             FontSize="16"
             Foreground="White"
-            Text="CD: " />
+            Text="间隔: " />
         <TextBox
             Width="40"
             VerticalAlignment="Center"
@@ -59,7 +60,7 @@
             FontSize="16"
             FontWeight="Bold"
             Foreground="Red"
-            IsEnabled="{Binding IsStopping}"
+            IsEnabled="{Binding MainVM.IsStopping}"
             Text="{Binding CD}" />
         <TextBlock
             VerticalAlignment="Center"

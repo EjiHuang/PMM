@@ -23,8 +23,12 @@ namespace PMM.Control
         public WatcherControl()
         {
             InitializeComponent();
+        }
 
-            DataContext = new WatcherViewModel(Application.Current.MainWindow.DataContext as MainViewModel);
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var watcher = new WatcherViewModel(Grid.GetRow(this));
+            DataContext = watcher;
         }
     }
 
