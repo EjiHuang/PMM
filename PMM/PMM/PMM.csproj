@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <PackageReference Include="DevExpressMvvm" Version="19.2.3" />
-    <PackageReference Include="WpfScreenHelper" Version="0.4.0" />
   </ItemGroup>
 
   <ItemGroup>

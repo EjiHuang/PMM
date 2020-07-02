@@ -63,7 +63,7 @@ namespace PMM.Control {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PMM;V1.1.0.0;component/control/watchercontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PMM;component/control/watchercontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Control\WatcherControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -130,10 +130,6 @@
             "DevExpressMvvm": {
               "target": "Package",
               "version": "[19.2.3, )"
-            },
-            "WpfScreenHelper": {
-              "target": "Package",
-              "version": "[0.4.0, )"
             }
           },
           "imports": [

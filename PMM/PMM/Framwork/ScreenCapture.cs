@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using WpfScreenHelper;
+// using WpfScreenHelper;
 
 namespace PMM.Framwork
 {
@@ -11,53 +11,53 @@ namespace PMM.Framwork
         Window
     }
 
-    public static class ScreenCapturer
-    {
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
+    //public static class ScreenCapturer
+    //{
+    //    [DllImport("user32.dll")]
+    //    private static extern IntPtr GetForegroundWindow();
 
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);
+    //    [DllImport("user32.dll")]
+    //    private static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct Rect
-        {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
-        }
+    //    [StructLayout(LayoutKind.Sequential)]
+    //    private struct Rect
+    //    {
+    //        public int Left;
+    //        public int Top;
+    //        public int Right;
+    //        public int Bottom;
+    //    }
 
-        public static Bitmap Capture(EnmScreenCaptureMode screenCaptureMode = EnmScreenCaptureMode.Window)
-        {
-            System.Windows.Rect bounds;
+    //    public static Bitmap Capture(EnmScreenCaptureMode screenCaptureMode = EnmScreenCaptureMode.Window)
+    //    {
+    //        System.Windows.Rect bounds;
 
-            if (screenCaptureMode == EnmScreenCaptureMode.Screen)
-            {
-                bounds = Screen.PrimaryScreen.Bounds;
-                CursorPosition = MouseHelper.MousePosition;
-            }
-            else
-            {
-                var foregroundWindowsHandle = GetForegroundWindow();
-                var rect = new Rect();
-                GetWindowRect(foregroundWindowsHandle, ref rect);
-                bounds = new System.Windows.Rect(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
-                CursorPosition = new System.Windows.Point((int)(MouseHelper.MousePosition.X - rect.Left), (int)(MouseHelper.MousePosition.Y - rect.Top));
-            }
+    //        if (screenCaptureMode == EnmScreenCaptureMode.Screen)
+    //        {
+    //            bounds = Screen.PrimaryScreen.Bounds;
+    //            CursorPosition = MouseHelper.MousePosition;
+    //        }
+    //        else
+    //        {
+    //            var foregroundWindowsHandle = GetForegroundWindow();
+    //            var rect = new Rect();
+    //            GetWindowRect(foregroundWindowsHandle, ref rect);
+    //            bounds = new System.Windows.Rect(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+    //            CursorPosition = new System.Windows.Point((int)(MouseHelper.MousePosition.X - rect.Left), (int)(MouseHelper.MousePosition.Y - rect.Top));
+    //        }
 
-            var result = new Bitmap((int)bounds.Width, (int)bounds.Height);
+    //        var result = new Bitmap((int)bounds.Width, (int)bounds.Height);
 
-            using (var g = Graphics.FromImage(result))
-            {
-                g.CopyFromScreen(new Point((int)bounds.Left, (int)bounds.Top), Point.Empty, new Size((int)bounds.Size.Width, (int)bounds.Size.Height));
-            }
+    //        using (var g = Graphics.FromImage(result))
+    //        {
+    //            g.CopyFromScreen(new Point((int)bounds.Left, (int)bounds.Top), Point.Empty, new Size((int)bounds.Size.Width, (int)bounds.Size.Height));
+    //        }
 
-            return result;
-        }
+    //        return result;
+    //    }
 
-        public static System.Windows.Point CursorPosition { get; private set; }
-    }
+    //    public static System.Windows.Point CursorPosition { get; private set; }
+    //}
 
     public class ScreenShotMaker
     {

@@ -125,14 +125,6 @@
             "fileVersion": "4.700.20.12001"
           }
         }
-      },
-      "WpfScreenHelper/0.4.0": {
-        "runtime": {
-          "lib/netcoreapp3.0/WpfScreenHelper.dll": {
-            "assemblyVersion": "0.4.0.0",
-            "fileVersion": "0.4.0.0"
-          }
-        }
       }
     }
   },
@@ -185,13 +177,6 @@
       "sha512": "sha512-zOHkQmzPCn5zm/BH+cxC1XbUS3P4Yoi3xzW7eRgVpDR2tPGSzyMZ17Ig1iRkfJuY0nhxkQQde8pgePNiA7z7TQ==",
       "path": "system.runtime.compilerservices.unsafe/4.7.1",
       "hashPath": "system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512"
-    },
-    "WpfScreenHelper/0.4.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-2HGQTDXkyoWk7O5c1uLyk88Q/EaEcLUHXkBokV5l1hUMKs48WNsxx95JEdfUozk0RkgpIms7sLL0y0xM5hxs3g==",
-      "path": "wpfscreenhelper/0.4.0",
-      "hashPath": "wpfscreenhelper.0.4.0.nupkg.sha512"
     }
   }
 }
